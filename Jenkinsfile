@@ -1,12 +1,29 @@
 pipeline {
     agent any
     stages {
-        stage ('Build') {
-            steps {
-                echo 'Running build'
-                sh 'npm install --no-daemon'
-                archieveArtifacts artifacts: 'dist/trainschedule.zip'
+        stage ('Build Docker Image') {
+            when {
+                branch 'master'
             }
+            steps {
+                script {
+                    app = docker.build("prashantsingh07/train-schedule")
+                }
+            }
+           
+            }
+        stage ('Push Docker Image') {
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'Docker_hub_id')
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
+                }
+            }
+        }    
         }
     }
 }
