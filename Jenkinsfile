@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage {
+        stage ('Docker Login'){
             sh 'Docker login'
         }
         stage ('Build Docker Image') {
