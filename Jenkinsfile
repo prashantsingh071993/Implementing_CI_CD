@@ -1,6 +1,9 @@
 pipeline {
     agent any
     stages {
+        stage {
+            sh 'Docker login'
+        }
         stage ('Build Docker Image') {
             when {
                 branch 'master'
