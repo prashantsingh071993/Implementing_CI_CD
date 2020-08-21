@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ('Docker Login'){
             steps {
-                sh 'Docker login'
+                sh 'docker login'
 
             }
             
