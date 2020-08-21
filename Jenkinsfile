@@ -9,7 +9,7 @@ pipeline {
                 script {
                     app = docker.build("prashantsingh07/train-schedule")
                      app.inside {
-                        sh 'echo $(curl 54.91.254.13:8080)'
+                        sh 'echo $(curl localhost:8080)'
                     }
                 }
             }
@@ -22,7 +22,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com/', 'Docker_hub_id')
+                    docker.withRegistry('https://registry.hub.docker.com/', 'docker_hub_login')
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                 }
