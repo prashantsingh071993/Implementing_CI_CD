@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ('Docker Login'){
             steps {
-                sh 'docker login'
+                sh 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
 
             }
             
