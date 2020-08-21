@@ -8,8 +8,10 @@ pipeline {
             steps {
                 script {
                     app = docker.build("prashantsingh07/train-schedule")
+                    sh 'echo docker images -a' 
                 }
             }
+        
            
             }
         stage ('Push Docker Image') {
